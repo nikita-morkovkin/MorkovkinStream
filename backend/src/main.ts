@@ -11,7 +11,6 @@ async function bootstrap() {
   const redis = app.get(RedisService);
   const config = app.get(ConfigService);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   app.use(cookieParser(config.getOrThrow<string>('COOKIES_SECRET')));
   app.useGlobalPipes(
     new ValidationPipe({

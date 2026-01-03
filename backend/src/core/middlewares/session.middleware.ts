@@ -1,6 +1,5 @@
 import { ConfigService } from '@nestjs/config';
 import { RedisStore } from 'connect-redis';
-import type { RequestHandler } from 'express';
 import session from 'express-session';
 import { ms, StringValue } from '../../shared/utils/ms.util';
 import parseBoolean from '../../shared/utils/parse-boolean.util';
@@ -9,7 +8,7 @@ import { RedisService } from '../redis/redis.service';
 export const createSessionMiddleware = (
   config: ConfigService,
   redis: RedisService,
-): RequestHandler => {
+) => {
   const redisStore = new RedisStore({
     client: redis,
     prefix: config.getOrThrow<string>('SESSION_PREFIX'),

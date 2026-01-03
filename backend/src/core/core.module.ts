@@ -14,7 +14,6 @@ import { RedisModule } from './redis/redis.module';
     AccountModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      ignoreEnvFile: true,
     }),
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
