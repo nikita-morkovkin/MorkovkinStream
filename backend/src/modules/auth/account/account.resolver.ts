@@ -10,9 +10,9 @@ export class AccountResolver {
   public constructor(private readonly accountService: AccountService) {}
 
   @Authorization()
-  @Query(() => [UserModel], { name: 'findProfile' })
-  public async me(@Authorized('id') id: string) {
-    return this.accountService.me(id);
+  @Query(() => UserModel, { name: 'findCurrentProfile' })
+  public async getCurrentProfile(@Authorized('id') id: string) {
+    return this.accountService.getCurrentProfile(id);
   }
 
   @Mutation(() => Boolean, { name: 'createUser' })
