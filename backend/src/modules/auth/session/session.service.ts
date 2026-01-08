@@ -12,6 +12,7 @@ import { RedisService } from 'src/core/redis/redis.service';
 import type { SessionMetadata } from 'src/shared/types/session-metadata.types';
 import { getSessionMetadata } from 'src/shared/utils/session-metadata.util';
 import { destroySession, saveSession } from 'src/shared/utils/session.util';
+import { TotpService } from '../totp/totp.service';
 import { VerificationService } from '../verification/verification.service';
 import { LoginInput } from './inputs/login.input';
 
@@ -32,6 +33,7 @@ export class SessionService {
     private readonly configService: ConfigService,
     private readonly redisService: RedisService,
     private readonly verificationService: VerificationService,
+    private readonly totpService: TotpService,
   ) {}
 
   public async findByUser(req: Request) {
@@ -113,7 +115,7 @@ export class SessionService {
   }
 
   public async login(req: Request, input: LoginInput, userAgent: string) {
-    const { login, password } = input;
+    const { login, password, totpPin } = input;
 
     const user = await this.prismaService.user.findFirst({
       where: {
@@ -139,6 +141,26 @@ export class SessionService {
         throw new UnauthorizedException(
           'Аккаунт не верифицирован, пожалуйста, проверьте вашу почту',
         );
+      }
+    }
+
+    if (user.isTotpEnabled) {
+      if (!totpPin) {
+        throw new UnauthorizedException('Нужен код TOTP для входа');
+      }
+
+      if (!user.totpSecret) {
+        throw new UnauthorizedException('TOTP не настроен для этого аккаунта');
+      }
+
+      const isValidTotp = this.totpService.validateTotp(
+        user.totpSecret,
+        totpPin,
+        user.email,
+      );
+
+      if (!isValidTotp) {
+        throw new UnauthorizedException('Неверный код TOTP');
       }
     }
 
