@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
+import { StorageService } from 'src/core/libs/storage/storage.service';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { MailService } from '../libs/mail/mail.service';
 
@@ -10,6 +11,7 @@ export class CronService {
   public constructor(
     private readonly prismaService: PrismaService,
     private readonly mailService: MailService,
+    private readonly storageService: StorageService,
   ) {}
 
   // Delete deactivated accounts older than 7 days
@@ -28,6 +30,7 @@ export class CronService {
       select: {
         id: true,
         email: true,
+        avatar: true,
       },
     });
 
@@ -42,10 +45,13 @@ export class CronService {
     await Promise.allSettled(
       deactivatedAccounts.map(async user => {
         try {
+          if (user.avatar) {
+            await this.storageService.remove(user.avatar);
+          }
           await this.mailService.sendAccountDeletionEmail(user.email);
         } catch (error) {
           this.logger.error(
-            `Failed to send account deletion email to ${user.email}:`,
+            `Failed to process account deletion for ${user.email}:`,
             error instanceof Error ? error.message : error,
           );
         }
