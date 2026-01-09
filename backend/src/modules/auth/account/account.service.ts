@@ -1,11 +1,15 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { hash } from 'argon2';
+import { hash, verify } from 'argon2';
+import { User } from 'generated/prisma/client';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { VerificationService } from '../verification/verification.service';
+import { ChangeEmailInput } from './inputs/change-email.input';
+import { ChangePasswordInput } from './inputs/change-password.input';
 import { CreateUserInput } from './inputs/create-user.input';
 
 @Injectable()
@@ -71,6 +75,64 @@ export class AccountService {
         error instanceof Error ? error.message : String(error),
       );
     }
+
+    return true;
+  }
+
+  public async changeEmail(user: User, input: ChangeEmailInput) {
+    const { email } = input;
+
+    if (user.email === email) {
+      throw new BadRequestException('Новая почта должна отличаться от текущей');
+    }
+
+    const isEmailExist = await this.prismaService.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (isEmailExist) {
+      throw new ConflictException('Такая почта уже занята');
+    }
+
+    // There is no checking email verification due to it is so difficult
+    await this.prismaService.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        email,
+        isEmailVerified: false,
+      },
+    });
+
+    return true;
+  }
+
+  public async changePassword(user: User, input: ChangePasswordInput) {
+    const { newPassword, oldPassword } = input;
+
+    if (newPassword === oldPassword) {
+      throw new BadRequestException('Новый пароль совпадает со старым');
+    }
+
+    const isPasswordValid = await verify(user.password, oldPassword);
+
+    if (!isPasswordValid) {
+      throw new BadRequestException('Неверный текущий пароль');
+    }
+
+    const newHashedPassword = await hash(newPassword);
+
+    await this.prismaService.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        password: newHashedPassword,
+      },
+    });
 
     return true;
   }
