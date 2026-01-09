@@ -67,7 +67,7 @@ export class DeactivateService {
       });
     }
 
-    if (!existingToken || existingToken.type !== TokenType.EMAIL_VERIFY) {
+    if (!existingToken || existingToken.type !== TokenType.DEACTIVATE_ACCOUNT) {
       throw new NotFoundException('Токен не найден');
     }
 
