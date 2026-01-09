@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { render } from '@react-email/render';
 import type { SessionMetadata } from 'src/shared/types/session-metadata.types';
+import AccountDeletionTemplate from './templates/account-deletion.template';
 import DeactivateTemplate from './templates/deactivate.template';
 import PasswordRecoveryTemplate from './templates/password-recovery.template';
 import VerificationTemplate from './templates/verification.template';
@@ -46,6 +47,13 @@ export class MailService {
     const html = await render(DeactivateTemplate({ domain, metadata, token }));
 
     return this.sendEmail(email, 'Деактивация аккаунта', html);
+  }
+
+  public async sendAccountDeletionEmail(email: string): Promise<any> {
+    const domain = this.configService.getOrThrow<string>('ALLOWED_ORIGINS');
+    const html = await render(AccountDeletionTemplate({ domain }));
+
+    return this.sendEmail(email, 'Аккаунт удален', html);
   }
 
   private sendEmail(

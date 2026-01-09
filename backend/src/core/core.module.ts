@@ -8,6 +8,7 @@ import { PasswordRecoveryModule } from 'src/modules/auth/password-recovery/passw
 import { SessionModule } from 'src/modules/auth/session/session.module';
 import { TotpModule } from 'src/modules/auth/totp/totp.module';
 import { VerificationModule } from 'src/modules/auth/verification/verification.module';
+import { CronModule } from 'src/modules/cron/cron.module';
 import { MailModule } from 'src/modules/libs/mail/mail.module';
 import { getGraphQLConfig } from './config/graphql.config';
 import { PrismaModule } from './prisma/prisma.module';
@@ -24,6 +25,7 @@ import { RedisModule } from './redis/redis.module';
     SessionModule,
     VerificationModule,
     MailModule,
+    CronModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
