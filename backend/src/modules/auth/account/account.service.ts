@@ -24,6 +24,9 @@ export class AccountService {
       where: {
         id,
       },
+      include: {
+        socialLinks: true,
+      },
     });
 
     if (!user) {
