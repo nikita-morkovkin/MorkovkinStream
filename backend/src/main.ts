@@ -8,7 +8,7 @@ import { createSessionMiddleware } from './core/middlewares/session.middleware';
 import { RedisService } from './core/redis/redis.service';
 
 async function bootstrap() {
-  const app = await NestFactory.create(CoreModule);
+  const app = await NestFactory.create(CoreModule, { rawBody: true });
   const redis = app.get(RedisService);
   const config = app.get(ConfigService);
   const applicationPort = config.getOrThrow<number>('APPLICATION_PORT');
