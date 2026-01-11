@@ -12,8 +12,10 @@ import { VerificationModule } from 'src/modules/auth/verification/verification.m
 import { CronModule } from 'src/modules/cron/cron.module';
 import { LivekitModule } from 'src/modules/libs/livekit/livekit.module';
 import { MailModule } from 'src/modules/libs/mail/mail.module';
+import { IngressModule } from 'src/modules/stream/ingress/ingress.module';
 import { StreamModule } from 'src/modules/stream/stream.module';
 import { getGraphQLConfig } from './config/graphql.config';
+import { getLiveKitConfig } from './config/livekit.config';
 import { StorageModule } from './libs/storage/storage.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { RedisModule } from './redis/redis.module';
@@ -24,7 +26,6 @@ import { RedisModule } from './redis/redis.module';
     PasswordRecoveryModule,
     DeactivateModule,
     TotpModule,
-    LivekitModule,
     RedisModule,
     AccountModule,
     SessionModule,
@@ -34,8 +35,14 @@ import { RedisModule } from './redis/redis.module';
     ProfileModule,
     CronModule,
     StreamModule,
+    IngressModule,
     ConfigModule.forRoot({
       isGlobal: true,
+    }),
+    LivekitModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: getLiveKitConfig,
+      inject: [ConfigService],
     }),
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
