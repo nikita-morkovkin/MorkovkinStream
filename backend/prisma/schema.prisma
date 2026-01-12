@@ -36,11 +36,15 @@ model User {
   isDeactivated Boolean   @default(false) @map("is_deactivated")
   deactivateAt  DateTime? @map("deactivate_at")
 
-  tokens       Token[]
-  socialLinks  SocialLink[]
-  streamId     String        @unique
+  tokens      Token[]
+  socialLinks SocialLink[]
+  streamId    String       @unique
+
   stream       Stream        @relation(fields: [streamId], references: [id])
   chatMessages ChatMessage[]
+
+  followers  Follow[] @relation(name: "Followers")
+  followings Follow[] @relation(name: "Followings")
 
   // Time
   createdAt DateTime @default(now()) @map("created_at")
@@ -56,7 +60,7 @@ model SocialLink {
   url      String
   position Int
 
-  user   User?  @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
   userId String
 
   // Time
@@ -111,16 +115,35 @@ model Stream {
   @@map("streams")
 }
 
+model Follow {
+  id String @id @default(uuid()) @map("id")
+
+  follower   User   @relation(name: "Followings", fields: [followerId], references: [id], onDelete: Cascade)
+  followerId String @map("follower_id")
+
+  following   User   @relation(name: "Followers", fields: [followingId], references: [id], onDelete: Cascade)
+  followingId String @map("following_id")
+
+  // Time
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+  @@map("follows")
+}
+
 model ChatMessage {
   id String @id @default(uuid())
 
   text String
 
-  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String? @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
 
-  stream   Stream? @relation(fields: [streamId], references: [id], onDelete: Cascade)
-  streamId String? @map("stream_id")
+  stream   Stream @relation(fields: [streamId], references: [id], onDelete: Cascade)
+  streamId String @map("stream_id")
 
   // Time
   createdAt DateTime @default(now()) @map("created_at")
@@ -142,6 +165,6 @@ model Category {
   // Time
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-
+  
   @@map("categories")
 }

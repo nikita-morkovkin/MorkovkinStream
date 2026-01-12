@@ -18,7 +18,7 @@ export class ChatMessageModel implements ChatMessage {
   public user: UserModel;
 
   @Field(() => String)
-  public streamId: string | null;
+  public streamId: string;
 
   @Field(() => StreamModel)
   public stream: StreamModel;
