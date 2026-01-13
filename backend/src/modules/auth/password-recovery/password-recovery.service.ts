@@ -8,6 +8,7 @@ import type { Request } from 'express';
 import { TokenType } from 'generated/prisma/enums';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { MailService } from 'src/modules/libs/mail/mail.service';
+import { TelegramService } from 'src/modules/libs/telegram/telegram.service';
 import { generateToken } from 'src/shared/utils/generate-token.util';
 import { getSessionMetadata } from 'src/shared/utils/session-metadata.util';
 import { NewPasswordInput } from './inputs/new-password.input';
@@ -18,6 +19,7 @@ export class PasswordRecoveryService {
   public constructor(
     private readonly prismaService: PrismaService,
     private readonly mailService: MailService,
+    private readonly telegramService: TelegramService,
   ) {}
 
   public async resetPassword(
@@ -30,6 +32,9 @@ export class PasswordRecoveryService {
     const user = await this.prismaService.user.findUnique({
       where: {
         email,
+      },
+      include: {
+        notificationSettings: true,
       },
     });
 
@@ -57,20 +62,34 @@ export class PasswordRecoveryService {
       );
     }
 
+    if (user.notificationSettings?.telegramNotifications && user.telegramId) {
+      await this.telegramService.sendPasswordResetToken(
+        user.telegramId,
+        resetToken.token,
+        metadata,
+      );
+    }
+
     return true;
   }
 
   public async newPassword(input: NewPasswordInput) {
     const { token, newPassword } = input;
-
-    const existingToken = await this.prismaService.token.findUnique({
+    let existingToken = await this.prismaService.token.findUnique({
       where: {
         token,
-        type: TokenType.PASSWORD_RESET,
       },
     });
 
     if (!existingToken) {
+      existingToken = await this.prismaService.token.findFirst({
+        where: {
+          id: token,
+        },
+      });
+    }
+
+    if (!existingToken || existingToken.type !== TokenType.PASSWORD_RESET) {
       throw new NotFoundException('Неверный токен');
     }
 
@@ -80,9 +99,15 @@ export class PasswordRecoveryService {
       throw new BadRequestException('Токен истек');
     }
 
+    if (!existingToken.userId) {
+      throw new BadRequestException(
+        'Неверный токен: нет связанного пользователя',
+      );
+    }
+
     await this.prismaService.user.update({
       where: {
-        id: existingToken.id,
+        id: existingToken.userId,
       },
       data: {
         password: await hash(newPassword),
@@ -92,7 +117,6 @@ export class PasswordRecoveryService {
     await this.prismaService.token.delete({
       where: {
         id: existingToken.id,
-        type: TokenType.PASSWORD_RESET,
       },
     });
   }

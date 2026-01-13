@@ -3,6 +3,7 @@ import { Cron } from '@nestjs/schedule';
 import { StorageService } from 'src/core/libs/storage/storage.service';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { MailService } from '../libs/mail/mail.service';
+import { TelegramService } from '../libs/telegram/telegram.service';
 
 @Injectable()
 export class CronService {
@@ -12,6 +13,7 @@ export class CronService {
     private readonly prismaService: PrismaService,
     private readonly mailService: MailService,
     private readonly storageService: StorageService,
+    private readonly telegramService: TelegramService,
   ) {}
 
   // Delete deactivated accounts older than 7 days
@@ -31,6 +33,17 @@ export class CronService {
         id: true,
         email: true,
         avatar: true,
+        telegramId: true,
+        notificationSettings: {
+          select: {
+            telegramNotifications: true,
+          },
+        },
+        stream: {
+          select: {
+            thumbnailUrl: true,
+          },
+        },
       },
     });
 
@@ -48,7 +61,21 @@ export class CronService {
           if (user.avatar) {
             await this.storageService.remove(user.avatar);
           }
+
+          if (user.stream?.thumbnailUrl) {
+            await this.storageService.remove(user.stream.thumbnailUrl);
+          }
+
           await this.mailService.sendAccountDeletionEmail(user.email);
+
+          if (
+            user.notificationSettings?.telegramNotifications &&
+            user.telegramId
+          ) {
+            await this.telegramService.sendAccountDeletedMessage(
+              user.telegramId,
+            );
+          }
         } catch (error) {
           this.logger.error(
             `Failed to process account deletion for ${user.email}:`,

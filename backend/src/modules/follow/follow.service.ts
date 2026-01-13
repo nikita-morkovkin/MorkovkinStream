@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import type { User } from 'generated/prisma';
 import { PrismaService } from 'src/core/prisma/prisma.service';
+import { TelegramService } from '../libs/telegram/telegram.service';
 import { NotificationService } from '../notification/notification.service';
 
 @Injectable()
@@ -12,6 +13,7 @@ export class FollowService {
   public constructor(
     private readonly prismaService: PrismaService,
     private readonly notificationService: NotificationService,
+    private readonly telegramService: TelegramService,
   ) {}
 
   public async findAllMyFollowings(user: User) {
@@ -90,6 +92,16 @@ export class FollowService {
     if (subscribe.following.notificationSettings?.siteNotifications) {
       await this.notificationService.createNewFollowing(
         subscribe.following.id,
+        subscribe.follower,
+      );
+    }
+
+    if (
+      subscribe.following.notificationSettings?.telegramNotifications &&
+      subscribe.following.telegramId
+    ) {
+      await this.telegramService.sendNewFollowing(
+        subscribe.following.telegramId,
         subscribe.follower,
       );
     }
