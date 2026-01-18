@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/common/Button';
 import {
   FindChannelByUsernameDocument,
   FindChannelByUsernameQuery,
@@ -26,6 +27,11 @@ export default function Home() {
     <div className='p-8'>
       <h1 className='text-2xl font-bold'>GraphQL Test</h1>
       <p className='text-center text-black text-2xl'>{t('title')}</p>
+
+      <Button>Default</Button>
+      <Button variant={'ghost'}>Ghost</Button>
+      <Button variant={'outline'}>Outline</Button>
+      <Button variant={'secondary'}>Secondary</Button>
 
       {data?.findChannelByUsername ? (
         <div className='mt-4'>
