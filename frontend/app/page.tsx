@@ -6,8 +6,10 @@ import {
   FindChannelByUsernameQueryVariables,
 } from '@/graphql/gql/graphql';
 import { useQuery } from '@apollo/client/react';
+import { useTranslations } from 'next-intl';
 
 export default function Home() {
+  const t = useTranslations('home');
   const { data, loading, error } = useQuery<
     FindChannelByUsernameQuery,
     FindChannelByUsernameQueryVariables
@@ -23,6 +25,7 @@ export default function Home() {
   return (
     <div className='p-8'>
       <h1 className='text-2xl font-bold'>GraphQL Test</h1>
+      <p className='text-center text-black text-2xl'>{t('title')}</p>
 
       {data?.findChannelByUsername ? (
         <div className='mt-4'>
