@@ -16,7 +16,7 @@ import {
   InputOTPSlot,
 } from '@/components/ui/common/InputOTP';
 import { LoginUserDocument } from '@/graphql/gql/graphql';
-import { loginSchema, TypeLoginSchema } from '@/schemas/auth/login.schema';
+import { loginSchema, type TypeLoginSchema } from '@/schemas/auth/login.schema';
 import { useMutation } from '@apollo/client/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
@@ -132,7 +132,7 @@ const LoginForm = () => {
                       </FormLabel>
                       <Link
                         href={'/account/recovery'}
-                        className='ml-auto inline-block text-sm text-sm'
+                        className='ml-auto inline-block text-sm'
                       >
                         {t('forgotPassword')}
                       </Link>

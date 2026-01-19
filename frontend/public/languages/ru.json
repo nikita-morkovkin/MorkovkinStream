@@ -36,6 +36,17 @@
       "successAlertTitle": "Ссылка отправлена",
       "successAlertDescription": "Мы отправили ссылку для сброса пароля на вашу почту. Если у вас включены уведомления в Telegram, ссылка также была отправлена туда",
       "errorMessage": "Ошибка при сбросе пароля"
+    },
+    "newPassword": {
+      "heading": "Новый пароль",
+      "backButtonLabel": "Есть учётная запись? Войти",
+      "passwordLabel": "Новый пароль",
+      "passwordDescription": "Пароль, который вы вводили при регистрации",
+      "passwordRepeatLabel": "Повторите пароль",
+      "passwordRepeatDescription": "Повторите свой новый пароль для подтверждения",
+      "submitButton": "Задать новый пароль",
+      "successMessage": "Пароль успешно изменён",
+      "errorMessage": "Ошибка при установлении нового пароля"
     }
   }
 }

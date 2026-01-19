@@ -15,11 +15,11 @@ import {
   FormMessage,
 } from '@/components/ui/common/Form';
 import { Input } from '@/components/ui/common/Input';
-import { CreateUserDocument } from '@/graphql/gql/graphql';
+import { ResetPasswordDocument } from '@/graphql/gql/graphql';
 import {
-  createAccountSchema,
-  type TypeCreateAccountSchema,
-} from '@/schemas/auth/create-account.schema';
+  resetPasswordSchema,
+  type TypeResetPasswordSchema,
+} from '@/schemas/auth/reset-password.schema';
 import { useMutation } from '@apollo/client/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CircleCheck } from 'lucide-react';
@@ -29,32 +29,30 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import AuthWrapper from '../AuthWrapper';
 
-const CreateAccountForm = () => {
-  const t = useTranslations('auth.register');
+const ResetPasswordForm = () => {
+  const t = useTranslations('auth.resetPassword');
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
-  const [createUser, { loading }] = useMutation(CreateUserDocument);
+  const [resetPassword, { loading: loadingResetPassword }] = useMutation(
+    ResetPasswordDocument,
+  );
 
-  const form = useForm<TypeCreateAccountSchema>({
-    resolver: zodResolver(createAccountSchema),
+  const form = useForm<TypeResetPasswordSchema>({
+    resolver: zodResolver(resetPasswordSchema),
     mode: 'onChange',
     defaultValues: {
-      username: '',
       email: '',
-      password: '',
     },
   });
 
   const { isValid } = form.formState;
 
-  const handleSubmit = async (data: TypeCreateAccountSchema) => {
-    await createUser({
+  const handleSubmit = async (data: TypeResetPasswordSchema) => {
+    await resetPassword({
       variables: {
         data,
       },
-      onCompleted(data) {
-        if (data.createUser) {
-          setIsSuccess(true);
-        }
+      onCompleted() {
+        setIsSuccess(true);
       },
       onError() {
         toast.error(t('errorMessage'));
@@ -84,26 +82,6 @@ const CreateAccountForm = () => {
           >
             <FormField
               control={form.control}
-              name='username'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className='font-semibold text-md'>
-                    {t('usernameLabel')}
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder='Nikita_MK'
-                      type='text'
-                      disabled={loading}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage className='text-red-700' />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
               name='email'
               render={({ field }) => (
                 <FormItem>
@@ -114,27 +92,7 @@ const CreateAccountForm = () => {
                     <Input
                       placeholder='nikita@gmail.com'
                       type='email'
-                      disabled={loading}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage className='text-red-700' />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='password'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className='font-semibold text-md'>
-                    {t('passwordLabel')}
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder='********'
-                      type='password'
-                      disabled={loading}
+                      disabled={loadingResetPassword}
                       {...field}
                     />
                   </FormControl>
@@ -144,7 +102,7 @@ const CreateAccountForm = () => {
             />
             <Button
               className='mt-2 w-full'
-              disabled={!isValid || loading}
+              disabled={!isValid || loadingResetPassword}
               type='submit'
             >
               {t('submitButton')}
@@ -156,4 +114,4 @@ const CreateAccountForm = () => {
   );
 };
 
-export default CreateAccountForm;
+export default ResetPasswordForm;
