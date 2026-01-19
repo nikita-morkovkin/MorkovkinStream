@@ -36,7 +36,7 @@ const CreateAccountForm = () => {
 
   const form = useForm<TypeCreateAccountSchema>({
     resolver: zodResolver(createAccountSchema),
-    mode: 'all',
+    mode: 'onChange',
     defaultValues: {
       username: '',
       email: '',
@@ -44,9 +44,7 @@ const CreateAccountForm = () => {
     },
   });
 
-  const {
-    formState: { isValid },
-  } = form;
+  const { isValid } = form.formState;
 
   const handleSubmit = async (data: TypeCreateAccountSchema) => {
     await createUser({
