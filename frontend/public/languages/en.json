@@ -12,7 +12,9 @@
       "errorMessage": "An error occurred while creating your account"
     },
     "verify": {
-      "successMessage": "Account verified successfully"
+      "heading": "Account verification",
+      "successMessage": "Account verified successfully",
+      "errorMessage": "Account verified error"
     }
   }
 }
