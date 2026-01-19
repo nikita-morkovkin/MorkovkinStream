@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
 export function proxy(request: NextRequest) {
-  const session = request.cookies.get('session')?.value;
+  const session = request.cookies.get('morkovkin_session')?.value;
 
   const isAuthPage = request.nextUrl.pathname.startsWith('/account');
 
