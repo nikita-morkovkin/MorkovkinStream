@@ -1,5 +1,7 @@
 import Header from '@/components/layouts/header/Header';
-import { ReactNode } from 'react';
+import LayoutContainer from '@/components/layouts/LayoutContainer';
+import Sidebar from '@/components/layouts/sidebar/Sidebar';
+import { type ReactNode } from 'react';
 
 export default async function WebsiteLayout({
   children,
@@ -9,10 +11,11 @@ export default async function WebsiteLayout({
   return (
     <div className='flex w-full flex-col'>
       <div className='flex-1'>
-        <div className='fixed inset-0 z-50 h[75px] w-full'>
+        <div className='fixed inset-0 z-50 h-[65px] w-full'>
           <Header />
         </div>
-        <main className='mt-[75px]'>{children}</main>
+        <Sidebar />
+        <LayoutContainer>{children}</LayoutContainer>
       </div>
     </div>
   );

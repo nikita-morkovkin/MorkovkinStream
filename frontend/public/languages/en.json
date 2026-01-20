@@ -21,17 +21,17 @@
     },
     "search": {
       "placeholder": "Search"
-    },
-    "dashboardNav": {
-      "settings": "Settings",
-      "streamSettings": "Stream settings",
-      "keys": "Stream keys",
-      "chatSettings": "Chat settings",
-      "followers": "Followers",
-      "sponsors": "Sponsors",
-      "premium": "Premium plans",
-      "transactions": "Transactions"
     }
+  },
+  "dashboardNav": {
+    "settings": "Settings",
+    "streamSettings": "Stream settings",
+    "keys": "Stream keys",
+    "chatSettings": "Chat settings",
+    "followers": "Followers",
+    "sponsors": "Sponsors",
+    "premium": "Premium plans",
+    "transactions": "Transactions"
   },
   "sidebarHeader": {
     "expand": "Expand",
@@ -70,11 +70,8 @@
       "heading": "Sign in to TeaStream",
       "backButtonLabel": "Don't have an account? Register!",
       "pinLabel": "6-digit code",
-      "pinDescription": "Enter the code from your authentication app.",
       "loginLabel": "Login",
-      "loginDescription": "Your name or email that you entered during registration.",
       "passwordLabel": "Password",
-      "passwordDescription": "The password you entered during registration.",
       "forgotPassword": "Forgot password?",
       "submitButton": "Sign In",
       "successMessage": "You have successfully logged in",

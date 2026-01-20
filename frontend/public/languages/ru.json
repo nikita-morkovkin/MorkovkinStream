@@ -21,17 +21,17 @@
     },
     "search": {
       "placeholder": "Поиск"
-    },
-    "dashboardNav": {
-      "settings": "Настройки",
-      "streamSettings": "Настройки трансляции",
-      "keys": "Ключи трансляции",
-      "chatSettings": "Настройки чата",
-      "followers": "Подписчики",
-      "sponsors": "Спонсоры",
-      "premium": "Премиум-планы",
-      "transactions": "Транзакции"
     }
+  },
+  "dashboardNav": {
+    "settings": "Настройки",
+    "streamSettings": "Настройки трансляции",
+    "keys": "Ключи трансляции",
+    "chatSettings": "Настройки чата",
+    "followers": "Подписчики",
+    "sponsors": "Спонсоры",
+    "premium": "Премиум-планы",
+    "transactions": "Транзакции"
   },
   "sidebarHeader": {
     "expand": "Развернуть",
