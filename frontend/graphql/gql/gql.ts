@@ -21,6 +21,7 @@ type Documents = {
     "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": typeof types.ResetPasswordDocument,
     "mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}": typeof types.VerifyAccountDocument,
     "mutation ClearSessionCookie {\n  clearSessionCookie\n}": typeof types.ClearSessionCookieDocument,
+    "query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}": typeof types.FindRecommendedChannelsDocument,
     "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": typeof types.FindNotificationsByUserDocument,
     "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n  }\n}": typeof types.FindCurrentProfileDocument,
     "query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}": typeof types.FindUnreadNotificationsCountDocument,
@@ -33,6 +34,7 @@ const documents: Documents = {
     "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": types.ResetPasswordDocument,
     "mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}": types.VerifyAccountDocument,
     "mutation ClearSessionCookie {\n  clearSessionCookie\n}": types.ClearSessionCookieDocument,
+    "query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}": types.FindRecommendedChannelsDocument,
     "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": types.FindNotificationsByUserDocument,
     "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n  }\n}": types.FindCurrentProfileDocument,
     "query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}": types.FindUnreadNotificationsCountDocument,
@@ -80,6 +82,10 @@ export function graphql(source: "mutation VerifyAccount($data: VerificationInput
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation ClearSessionCookie {\n  clearSessionCookie\n}"): (typeof documents)["mutation ClearSessionCookie {\n  clearSessionCookie\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}"): (typeof documents)["query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

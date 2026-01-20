@@ -98,5 +98,11 @@
       "successMessage": "Пароль успешно изменён",
       "errorMessage": "Ошибка при установлении нового пароля"
     }
+  },
+
+  "components": {
+    "liveBadge": {
+      "text": "В ЭФИРЕ"
+    }
   }
 }

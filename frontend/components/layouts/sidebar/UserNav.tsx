@@ -1,5 +1,6 @@
 import { Folder, Home, Radio } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import RecommendedChannels from './RecommendedChannels';
 import SidebarItem from './SidebarItem';
 import { type RouteItem } from './types/route.interface';
 
@@ -28,6 +29,7 @@ const UserNav = () => {
       {routes.map(route => (
         <SidebarItem key={route.href} route={route} />
       ))}
+      <RecommendedChannels />
     </div>
   );
 };
