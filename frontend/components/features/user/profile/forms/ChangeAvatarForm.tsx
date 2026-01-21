@@ -23,7 +23,7 @@ import { useTranslations } from 'next-intl';
 import { useRef, type ChangeEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import ChangeAvatarFormSkeleton from './ChangeAvatarFormSkeleton';
+import ChangeAvatarFormSkeleton from '../skeletons/ChangeAvatarFormSkeleton';
 
 const ChangeAvatarForm = () => {
   const t = useTranslations('dashboard.settings.profile.avatar');

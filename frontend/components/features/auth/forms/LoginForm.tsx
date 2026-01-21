@@ -56,7 +56,7 @@ const LoginForm = () => {
           setIsShow2FA(true);
         } else {
           auth();
-          toast.success('successMessage');
+          toast.success(t('successMessage'));
           router.push('/dashboard/settings');
         }
       },

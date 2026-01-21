@@ -10,7 +10,7 @@ const Logo = () => {
   return (
     <Link
       href={'/'}
-      className='flex ml-6 items-center gap-x-4 transition-opacity hover:opacity-75'
+      className='flex ml-4 items-center gap-x-4 transition-opacity hover:opacity-75'
     >
       <Image src={'icons/logo.svg'} alt='Nexa' width={35} height={35} />
       <div className='hidden leading-tight lg:block'>

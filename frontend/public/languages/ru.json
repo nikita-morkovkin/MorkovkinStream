@@ -128,6 +128,18 @@
           "errorMessage": "Ошибка при обновлении изображения профиля",
           "successRemoveMessage": "Изображение профиля обновлено успешно",
           "errorRemoveMessage": "Ошибка при удалении изображения профиля"
+        },
+        "info": {
+          "heading": "Настройки профиля",
+          "usernameLabel": "Имя пользователя",
+          "usernamePlaceholder": "Никита",
+          "displayNameLabel": "Отображаемое имя",
+          "displayNamePlaceholder": "nikita_mk",
+          "bioLabel": "О себе",
+          "bioPlaceholder": "Я люблю программировать",
+          "submitButton": "Сохранить изменения",
+          "successMessage": "Профиль успешно обновлён",
+          "errorMessage": "Ошибка при обновлении профиля"
         }
       }
     }

@@ -128,6 +128,18 @@
           "errorMessage": "Error updating profile image",
           "successRemoveMessage": "Profile image updated successfully",
           "errorRemoveMessage": "Error removing profile image"
+        },
+        "info": {
+          "heading": "Profile Settings",
+          "usernameLabel": "Username",
+          "usernamePlaceholder": "Nikita",
+          "displayNameLabel": "Display Name",
+          "displayNamePlaceholder": "nikita_mk",
+          "bioLabel": "About me",
+          "bioPlaceholder": "I love programming",
+          "submitButton": "Save changes",
+          "successMessage": "Profile updated successfully",
+          "errorMessage": "Error updating profile"
         }
       }
     }

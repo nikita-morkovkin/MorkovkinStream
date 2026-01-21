@@ -4,5 +4,7 @@ query FindCurrentProfile {
     email
     isTotpEnabled
     avatar
+    bio
+    displayName
   }
 }
