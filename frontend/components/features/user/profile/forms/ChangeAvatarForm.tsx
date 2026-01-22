@@ -12,7 +12,7 @@ import {
 import {
   uploadFileSchema,
   type TypeUploadFileSchema,
-} from '@/schemas/upload-file.schema';
+} from '@/schemas/file/upload-file.schema';
 import { useCurrentProfile } from '@/shared/hooks/useCurrentProfile';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { cn } from '@/shared/utils/tw-merge.util';

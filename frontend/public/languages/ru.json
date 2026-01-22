@@ -37,7 +37,8 @@
     "expand": "Развернуть",
     "collapse": "Свернуть",
     "navigation": "Навигация",
-    "forYou": "Для вас"
+    "forYou": "Для вас",
+    "errorMessage": "Нельзя открыть боковое меню на мобильном устройстве"
   },
   "userNav": {
     "home": "Главная",
@@ -140,6 +141,29 @@
           "submitButton": "Сохранить изменения",
           "successMessage": "Профиль успешно обновлён",
           "errorMessage": "Ошибка при обновлении профиля"
+        },
+        "socialLinks": {
+          "createForm": {
+            "heading": "Ссылки на соцсети",
+            "titleLabel": "Название ссылки",
+            "titlePlaceholder": "GitHub",
+            "titleDescription": "Текст ссылки",
+            "urlLabel": "URL ссылки",
+            "urlPlaceholder": "https://github.com/nikita-morkovkin",
+            "urlDescription": "Куда ведет эта ссылка? Введите полный URL-адрес, например https://github.com/TeaCoder52",
+            "submitButton": "Добавить",
+            "successMessage": "Ссылка на соц. сеть успешно добавлена"
+          },
+          "editForm": {
+            "cancelButton": "Отмена",
+            "submitButton": "Сохранить",
+            "successUpdateMessage": "Ссылка на соц. сеть успешно изменена",
+            "errorUpdateMessage": "Ошибка при обновлении соц. сети",
+            "successRemoveMessage": "Ссылка на соц. сеть успешно удалена",
+            "errorRemoveMessage": "Ошибка при удалении соц. сети"
+          },
+          "successReorderMessage": "Порядок ссылок на соц. сети изменен",
+          "errorReorderMessage": "Ошибка при изменении порядка соц. сетей"
         }
       }
     }

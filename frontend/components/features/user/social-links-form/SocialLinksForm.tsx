@@ -10,56 +10,60 @@ import {
   FormMessage,
 } from '@/components/ui/common/Form';
 import { Input } from '@/components/ui/common/Input';
-import { Separator } from '@/components/ui/common/Separator';
-import { Textarea } from '@/components/ui/common/Textarea';
 import FormWrapper from '@/components/ui/elements/FormWrapper';
-import { ChangeProfileInfoDocument } from '@/graphql/gql/graphql';
 import {
-  changeInfoUserSchema,
-  type TypeChangeInfoUserSchema,
-} from '@/schemas/user/change-info-user.schema';
-import { useCurrentProfile } from '@/shared/hooks/useCurrentProfile';
-import { useMutation } from '@apollo/client/react';
+  CreateSocialLinkDocument,
+  FindSocialLinksDocument,
+} from '@/graphql/gql/graphql';
+import {
+  socialLinksSchema,
+  type TypeSocialLinksSchema,
+} from '@/schemas/user/social-links.schema';
+import { useMutation, useQuery } from '@apollo/client/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Separator } from '@radix-ui/react-dropdown-menu';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import ChangeInfoProfileSkeleton from '../skeletons/ChangeInfoProfileSkeleton';
+import SocialLinkFormSkeleton from './skeletons/SocialLinkFormSkeleton';
+import SocialLinkList from './SocialLinkList';
 
-const ChangeInfoForm = () => {
-  const t = useTranslations('dashboard.settings.profile.info');
-  const { user, isLoadingProfile, refetch } = useCurrentProfile();
+const SocialLinksForm = () => {
+  const t = useTranslations(
+    'dashboard.settings.profile.socialLinks.createForm',
+  );
 
-  const form = useForm<TypeChangeInfoUserSchema>({
-    resolver: zodResolver(changeInfoUserSchema),
-    values: {
-      username: user?.username || '',
-      displayName: user?.username || '',
-      bio: user?.bio || '',
-    },
-  });
+  const { loading: isLoadingSocialLinks, refetch } = useQuery(
+    FindSocialLinksDocument,
+  );
 
-  const [updateUserInfo, { loading: isUserInfoLoading }] = useMutation(
-    ChangeProfileInfoDocument,
-    {
+  const [createSocialLink, { loading: isLoadingCreateSocialLink }] =
+    useMutation(CreateSocialLinkDocument, {
       onCompleted() {
         refetch();
         toast.success(t('successMessage'));
       },
       onError() {
-        toast.error(t('errorMessage'));
+        toast.error(t(''));
       },
+    });
+
+  const form = useForm<TypeSocialLinksSchema>({
+    resolver: zodResolver(socialLinksSchema),
+    defaultValues: {
+      title: '',
+      url: '',
     },
-  );
+  });
 
   const { isValid, isDirty } = form.formState;
 
-  const handleSubmit = (data: TypeChangeInfoUserSchema) => {
-    updateUserInfo({ variables: { data } });
+  const handleSubmit = (data: TypeSocialLinksSchema) => {
+    createSocialLink({ variables: { data } });
   };
 
-  return isLoadingProfile ? (
-    <ChangeInfoProfileSkeleton />
+  return isLoadingSocialLinks ? (
+    <SocialLinkFormSkeleton />
   ) : (
     <FormWrapper heading={t('heading')}>
       <Form {...form}>
@@ -69,15 +73,15 @@ const ChangeInfoForm = () => {
         >
           <FormField
             control={form.control}
-            name='username'
+            name='title'
             render={({ field }) => (
               <FormItem>
                 <FormLabel className='font-semibold text-md'>
-                  {t('usernameLabel')}
+                  {t('titleLabel')}
                 </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder={t('usernamePlaceholder')}
+                    placeholder={t('titlePlaceholder')}
                     type='text'
                     {...field}
                   />
@@ -90,15 +94,15 @@ const ChangeInfoForm = () => {
 
           <FormField
             control={form.control}
-            name='displayName'
+            name='url'
             render={({ field }) => (
               <FormItem>
                 <FormLabel className='font-semibold text-md'>
-                  {t('displayNameLabel')}
+                  {t('urlLabel')}
                 </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder={t('displayNamePlaceholder')}
+                    placeholder={t('urlPlaceholder')}
                     type='text'
                     {...field}
                   />
@@ -108,27 +112,14 @@ const ChangeInfoForm = () => {
             )}
           />
           <Separator />
-
-          <FormField
-            control={form.control}
-            name='bio'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className='font-semibold text-md'>
-                  {t('bioLabel')}
-                </FormLabel>
-                <FormControl>
-                  <Textarea placeholder={t('bioPlaceholder')} {...field} />
-                </FormControl>
-                <FormMessage className='text-red-700' />
-              </FormItem>
-            )}
-          />
 
           <div className='flex justify-end p-5'>
             <Button
               disabled={
-                !isValid || !isDirty || isLoadingProfile || isUserInfoLoading
+                !isValid ||
+                !isDirty ||
+                isLoadingCreateSocialLink ||
+                isLoadingSocialLinks
               }
             >
               {t('submitButton')}
@@ -136,8 +127,9 @@ const ChangeInfoForm = () => {
           </div>
         </form>
       </Form>
+      <SocialLinkList />
     </FormWrapper>
   );
 };
 
-export default ChangeInfoForm;
+export default SocialLinksForm;

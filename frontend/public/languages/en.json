@@ -37,7 +37,8 @@
     "expand": "Expand",
     "collapse": "Collapse",
     "navigation": "Navigation",
-    "forYou": "For you"
+    "forYou": "For you",
+    "errorMessage": "Not allowed to open sidebar in mobile device"
   },
   "userNav": {
     "home": "Home",
@@ -140,6 +141,29 @@
           "submitButton": "Save changes",
           "successMessage": "Profile updated successfully",
           "errorMessage": "Error updating profile"
+        },
+        "socialLinks": {
+          "createForm": {
+            "heading": "Social Media Links",
+            "titleLabel": "Link Title",
+            "titlePlaceholder": "GitHub",
+            "titleDescription": "Link text",
+            "urlLabel": "Link URL",
+            "urlPlaceholder": "https://github.com/nikita-morkovkin",
+            "urlDescription": "Where does this link lead? Enter the full URL, for example https://github.com/TeaCoder52",
+            "submitButton": "Add",
+            "successMessage": "Social media link added successfully"
+          },
+          "editForm": {
+            "cancelButton": "Cancel",
+            "submitButton": "Save",
+            "successUpdateMessage": "Social media link updated successfully",
+            "errorUpdateMessage": "Error updating social media link",
+            "successRemoveMessage": "Social media link deleted successfully",
+            "errorRemoveMessage": "Error deleting social media link"
+          },
+          "successReorderMessage": "Social media links order changed",
+          "errorReorderMessage": "Error changing social media links order"
         }
       }
     }
