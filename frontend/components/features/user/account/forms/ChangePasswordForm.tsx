@@ -22,7 +22,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import ChangeEmailSkeleton from '../skeletons/ChangeEmailSkeleton';
+import ChangePasswordSkeleton from '../skeletons/ChangePasswordSkeleton';
 
 const ChangeEmailForm = () => {
   const t = useTranslations('dashboard.settings.account.password');
@@ -55,7 +55,7 @@ const ChangeEmailForm = () => {
   };
 
   return isLoadingUpdatePassword ? (
-    <ChangeEmailSkeleton />
+    <ChangePasswordSkeleton />
   ) : (
     <FormWrapper heading={t('heading')}>
       <Form {...form}>
