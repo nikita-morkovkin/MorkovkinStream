@@ -33,7 +33,7 @@ const SearchInput = () => {
           onChange={event => setSearchTerm(event.target.value)}
         />
         <Button
-          className='absolute left-90 h-[38px] cursor-pointer'
+          className='absolute left-90 h-[36px] bottom cursor-pointer bg-(--primary)'
           type='submit'
         >
           <SearchIcon className='absolute size-[18px]' />

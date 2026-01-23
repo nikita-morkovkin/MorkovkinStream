@@ -248,6 +248,10 @@
           "description": "Выберите язык, который будет использован на сайте",
           "selectPlaceholder": "Выберите язык",
           "successMessage": "Site language updated successfully"
+        },
+        "color": {
+          "heading": "Цвета акцента",
+          "description": "Выберите цвет акцента для интерфейса"
         }
       }
     }

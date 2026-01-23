@@ -248,6 +248,10 @@
           "description": "Select the language that will be used on the site",
           "selectPlaceholder": "Select a language",
           "successMessage": "Язык сайта успешно изменен"
+        },
+        "color": {
+          "heading": "Accent color",
+          "description": "Choose the color for website interface"
         }
       }
     }

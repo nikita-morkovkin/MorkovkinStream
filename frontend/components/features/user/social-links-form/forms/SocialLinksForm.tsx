@@ -115,6 +115,8 @@ const SocialLinksForm = () => {
 
           <div className='flex justify-end pt-5 pr-0.5 pb-3'>
             <Button
+              variant={'default'}
+              className='bg-(--primary)'
               disabled={
                 !isValid ||
                 !isDirty ||

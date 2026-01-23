@@ -87,7 +87,7 @@ const EnableTotp = () => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button>{t('trigger')}</Button>
+        <Button className='bg-(--primary)'>{t('trigger')}</Button>
       </DialogTrigger>
       <DialogContent className='sm:max-w-md'>
         <DialogHeader>
@@ -145,6 +145,7 @@ const EnableTotp = () => {
             <DialogFooter>
               <Button
                 type='submit'
+                className='bg-(--primary)'
                 disabled={!isValid || isLoadingGenerateTotp || isLoadingEnable}
               >
                 {t('submitButton')}

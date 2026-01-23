@@ -24,6 +24,7 @@ const ToggleCard = ({
       description={description}
       rightContent={
         <Switch
+          className='bg-(--primary) text-(--primary)'
           checked={value}
           onCheckedChange={onChange}
           disabled={isDisabled}

@@ -100,7 +100,10 @@ const ChangeEmailForm = () => {
           <Separator />
 
           <div className='flex justify-end pt-2 pr-0.5 pb-3'>
-            <Button disabled={!isValid || !isDirty || isLoadingUpdatePassword}>
+            <Button
+              className='bg-(--primary)'
+              disabled={!isValid || !isDirty || isLoadingUpdatePassword}
+            >
               {t('submitButton')}
             </Button>
           </div>

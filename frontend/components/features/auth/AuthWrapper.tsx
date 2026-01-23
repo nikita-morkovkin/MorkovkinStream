@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/common/Card';
-import Image from 'next/image';
+import ServiceLogo from '@/components/ui/elements/ServiceLogo';
 import Link from 'next/link';
 import { PropsWithChildren } from 'react';
 
@@ -26,13 +26,10 @@ const AuthWrapper = ({
     <div className='flex min-h-screen w-full items-center justify-center'>
       <Card className='w-[450px]'>
         <CardHeader className='flex items-center justify-center gap-x-4'>
-          <Image
-            src='/icons/logo.svg'
-            alt='MorkovkinStream'
-            width={40}
-            height={40}
-          />
-          <CardTitle className='text-xl'>{heading}</CardTitle>
+          <div className='w-[40px] h-[40px]'>
+            <ServiceLogo />
+          </div>
+          <CardTitle className='text-xl mb-2'>{heading}</CardTitle>
         </CardHeader>
         <CardContent>{children}</CardContent>
         <CardFooter className='-mt-2'>

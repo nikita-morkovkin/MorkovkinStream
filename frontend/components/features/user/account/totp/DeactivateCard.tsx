@@ -21,7 +21,7 @@ const DeactivateCard = () => {
             message={t('confirmModal.message')}
             onConfirm={() => router.push('/account/deactivate')}
           >
-            <Button variant={'default'}>{t('deactivateButton')}</Button>
+            <Button className='bg-(--primary)'>{t('deactivateButton')}</Button>
           </ConfirmModal>
         </div>
       }

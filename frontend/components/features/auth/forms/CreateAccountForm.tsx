@@ -143,7 +143,7 @@ const CreateAccountForm = () => {
               )}
             />
             <Button
-              className='mt-2 w-full'
+              className='mt-2 w-full bg-(--primary)'
               disabled={!isValid || loading}
               type='submit'
             >

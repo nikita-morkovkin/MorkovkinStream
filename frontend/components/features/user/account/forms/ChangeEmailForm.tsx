@@ -86,6 +86,7 @@ const ChangeEmailForm = () => {
           <Separator />
           <div className='flex justify-end pt-2 pr-0.5 pb-3'>
             <Button
+              className='bg-(--primary)'
               disabled={
                 !isValid || !isDirty || isLoadingChange || isLoadingProfile
               }

@@ -149,6 +149,7 @@ const SocialLinkItem = ({ provided, socialLink }: SocialItemProps) => {
                   disabled={
                     isLoadingUpdate || !isDirty || !isValid || isLoadingRemove
                   }
+                  className='bg-(--primary)'
                   variant={'default'}
                 >
                   {t('submitButton')}

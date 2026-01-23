@@ -15,6 +15,7 @@ import ChangeThemeForm from './appearance/forms/ChangeThemeForm';
 import ChangeAvatarForm from './profile/forms/ChangeAvatarForm';
 import ChangeInfoForm from './profile/forms/ChangeInfoForm';
 import SocialLinksForm from './social-links-form/forms/SocialLinksForm';
+import ChangeColorForm from './appearance/forms/ChangeColorForm';
 
 const UserSettings = () => {
   const t = useTranslations('dashboard.settings');
@@ -85,6 +86,7 @@ const UserSettings = () => {
             />
             <ChangeThemeForm />
             <ChangeLanguageForm />
+            <ChangeColorForm />
           </div>
         </TabsContent>
         <TabsContent value='notifications'></TabsContent>

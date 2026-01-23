@@ -31,7 +31,11 @@ const DisableTotp = () => {
       message={t('message')}
       onConfirm={() => disableTotp()}
     >
-      <Button variant={'secondary'} disabled={isLoadingDisableTotp}>
+      <Button
+        variant={'secondary'}
+        className='bg-(--primary)'
+        disabled={isLoadingDisableTotp}
+      >
         {t('trigger')}
       </Button>
     </ConfirmModal>

@@ -38,7 +38,7 @@ const ConfirmModal = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm}>
+          <AlertDialogAction className='bg-(--primary)' onClick={onConfirm}>
             {t('continue')}
           </AlertDialogAction>
         </AlertDialogFooter>

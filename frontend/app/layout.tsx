@@ -1,4 +1,5 @@
 import { Toaster } from '@/components/ui/common/Sonner';
+import ColorSwitcher from '@/components/ui/elements/ColorSwitcher';
 import ApolloClientProvider from '@/providers/ApolloClientProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { GeistMono } from 'geist/font/mono';
@@ -8,6 +9,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { type ReactNode } from 'react';
 import '../styles/globals.css';
+import '../styles/themes.css';
 
 export const metadata: Metadata = {
   title: 'Nexa',
@@ -27,6 +29,7 @@ export default async function RootLayout({
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} min-h-screen antialiased`}
       >
+        <ColorSwitcher />
         <ApolloClientProvider>
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider
