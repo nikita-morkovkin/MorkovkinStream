@@ -9,9 +9,10 @@ import { Card } from '../common/Card';
 
 interface CardContainerProps {
   heading: string;
-  description: string;
+  description?: string;
   rightContent?: ReactNode;
   Icon?: IconType | LucideIcon;
+  isRightContentFull?: boolean;
   isBetween?: boolean;
 }
 
@@ -21,6 +22,7 @@ const CardContainer = ({
   rightContent,
   Icon,
   children,
+  isRightContentFull = false,
   isBetween = true,
 }: PropsWithChildren<CardContainerProps>) => {
   const isMobile = useMediaQuery('(max-width: 1024px)');
@@ -49,7 +51,11 @@ const CardContainer = ({
             {description}
           </p>
         </div>
-        {rightContent && <div>{rightContent}</div>}
+        {rightContent && (
+          <div className={cn(isRightContentFull && 'w-full ml-8')}>
+            {rightContent}
+          </div>
+        )}
       </div>
       {children && <div className='mt-4'>{children}</div>}
     </Card>

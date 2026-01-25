@@ -298,6 +298,58 @@
           "createdAt": "Created at:"
         }
       }
+    },
+    "keys": {
+      "header": {
+        "heading": "Stream Keys",
+        "description": "Generate a URL and key to start your broadcast"
+      },
+      "url": {
+        "heading": "URL"
+      },
+      "key": {
+        "heading": "Key"
+      },
+      "instructionModal": {
+        "trigger": "Instructions",
+        "heading": "OBS Setup Guide for Live Streaming",
+        "description": "To start sharing your content with your audience, follow this detailed guide on connecting OBS Studio. Just a few steps and you'll be ready to go live!",
+        "step1Title": "🔑 Step 1: Download OBS Studio and Generate Server URL & Stream Key",
+        "step1Description": "To start broadcasting, you need to obtain two essential elements: Server URL and Stream Key. Follow these steps:",
+        "downloadObs": "Download OBS Studio",
+        "downloadObsDescription": "Before setting up your stream, download and install the software",
+        "obsLinkText": "OBS Studio",
+        "copyKeys": "Copy Server URL and Stream Key",
+        "copyKeysDescription": "Once generated, two fields will appear: Server URL and Stream Key. Click the copy icons next to each field to save the data to your clipboard.",
+        "step2Title": "🎛️ Step 2: Configure OBS Studio",
+        "step2Description": "Now that you have the necessary data, let's configure OBS for your broadcast:",
+        "openObs": "Open OBS Studio",
+        "openObsDescription": "If you haven't installed OBS yet, download it from the official website and install it. Once launched, the OBS main window will open.",
+        "openStreamSettings": "Open Stream Settings",
+        "openStreamSettingsDescription": "In the top menu, click \"File\" → \"Settings\". Go to the \"Stream\" tab.",
+        "enterDetails": "Enter your details",
+        "enterDetailsDescription": "In the \"Service\" field, select \"Custom...\". Paste your previously copied Server URL into the \"URL\" field. Paste your Stream Key into the \"Stream Key\" field.",
+        "saveSettings": "Save Settings",
+        "saveSettingsDescription": "Click \"Apply\" and then \"OK\" to save your changes.",
+        "step3Title": "🚀 Step 3: Start Streaming",
+        "step3Description": "Once OBS is successfully configured, you are ready to start your live stream:",
+        "startStream": "Start Streaming",
+        "startStreamDescription": "Go back to the OBS main screen and click the \"Start Streaming\" button.",
+        "monitorStream": "Monitor your stream",
+        "monitorStreamDescription": "Your broadcast will start in real-time, and you will be able to monitor it both on the platform and in OBS.",
+        "congrats": "✨ Congratulations! You have successfully set up OBS for streaming on our platform. Your audience is waiting for new exciting moments and content! 🎉",
+        "close": "Close"
+      },
+      "createModal": {
+        "trigger": "Generate Keys",
+        "heading": "Generate Keys",
+        "ingressTypeLabel": "Connection Type",
+        "ingressTypeDescription": "Select RTMP for classic broadcasting or WHIP for WebRTC connections.",
+        "ingressTypePlaceholder": "Select connection type",
+        "submitButton": "Generate",
+        "successMessage": "Ingress stream created",
+        "errorMessage": "Error creating ingress stream"
+      }
     }
   },
 
@@ -308,6 +360,9 @@
     "confirmModal": {
       "cancel": "Cancel",
       "continue": "Continue"
+    },
+    "copyButton": {
+      "successMessage": "Copied"
     }
   },
   "utils": {

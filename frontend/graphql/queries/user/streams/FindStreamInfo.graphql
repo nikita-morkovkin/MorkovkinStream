@@ -1,0 +1,8 @@
+query FindStreamInfo {
+  findCurrentProfile {
+    stream {
+      serverUrl
+      streamKey
+    }
+  }
+}
