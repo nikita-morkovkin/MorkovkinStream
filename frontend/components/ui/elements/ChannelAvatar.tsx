@@ -50,6 +50,7 @@ const ChannelAvatar = ({
             className={cn(
               'font-semibold mb-1',
               size === 'xl' && 'mb-2',
+              size === 'sm' && 'mb-0',
             )}
           >
             {channel.username?.[0]}

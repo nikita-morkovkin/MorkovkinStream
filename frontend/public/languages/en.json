@@ -380,7 +380,20 @@
         "date": "Subscription's date",
         "user": "User",
         "actions": "Actions",
-        "viewChannel": "Channel"
+        "viewChannel": "View to channel"
+      }
+    },
+    "sponsors": {
+      "header": {
+        "heading": "Sponsors",
+        "description": "List of your sponsors"
+      },
+      "columns": {
+        "date": "Expiration date",
+        "user": "User",
+        "plan": "Plan",
+        "actions": "Actions",
+        "viewChannel": "View to channel"
       }
     }
   },

@@ -13,8 +13,8 @@ import ChannelVerified from '@/components/ui/elements/ChannelVerified';
 import Heading from '@/components/ui/elements/Heading';
 import DataTableSkeleton from '@/components/ui/skeletons/DataTableSkeleton';
 import {
-  FindAllMyFollowersDocument,
-  type FindAllMyFollowersQuery,
+  FindAllMySponsorsDocument,
+  type FindAllMySponsorsQuery,
 } from '@/graphql/gql/graphql';
 import { useFormatDateWithTranslations } from '@/shared/hooks/useFormatDateWithTranslations';
 import { useQuery } from '@apollo/client/react';
@@ -23,20 +23,20 @@ import { ArrowUpDown, MoreHorizontal, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
-const FollowersTable = () => {
-  const t = useTranslations('dashboard.followers');
+const SponsorsTable = () => {
+  const t = useTranslations('dashboard.sponsors');
   const formatDate = useFormatDateWithTranslations();
 
-  const { data, loading: isLoadingFollowers } = useQuery(
-    FindAllMyFollowersDocument,
+  const { data, loading: isLoadingSponsors } = useQuery(
+    FindAllMySponsorsDocument,
   );
-  const followers = data?.findAllMyFollowers ?? [];
+  const sponsors = data?.findAllMySponsors ?? [];
 
-  const followersColumns: ColumnDef<
-    FindAllMyFollowersQuery['findAllMyFollowers'][0]
+  const sponsorsColumns: ColumnDef<
+    FindAllMySponsorsQuery['findAllMySponsors'][0]
   >[] = [
     {
-      accessorKey: 'createdAt',
+      accessorKey: 'expiresAt',
       header: ({ column }) => {
         return (
           <Button
@@ -48,20 +48,34 @@ const FollowersTable = () => {
           </Button>
         );
       },
-      cell: ({ row }) => formatDate(row.original.createdAt),
+      cell: ({ row }) => formatDate(row.original.expiresAt),
     },
     {
-      accessorKey: 'followerUser.username',
+      accessorKey: 'user',
       header: t('columns.user'),
       cell: ({ row }) => (
         <div className='flex items-center gap-x-2'>
-          <ChannelAvatar channel={row.original.followerUser} size={'sm'} />
-          <h2>{row.original.followerUser.username}</h2>
-          {row.original.followerUser.isVerified && (
-            <ChannelVerified size={'sm'} />
-          )}
+          <ChannelAvatar channel={row.original.user} size={'sm'} />
+          <h2>{row.original.user.username}</h2>
+          {row.original.user.isVerified && <ChannelVerified size={'sm'} />}
         </div>
       ),
+    },
+    {
+      accessorKey: 'plan.title',
+      id: 'planTitle',
+      header: ({ column }) => {
+        return (
+          <Button
+            variant='ghost'
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            <span className='font-semibold'>{t('columns.plan')}</span>
+            <ArrowUpDown className='ml-2 size-4' />
+          </Button>
+        );
+      },
+      cell: ({ row }) => row.original.plan.title,
     },
     {
       accessorKey: 'actions',
@@ -75,10 +89,7 @@ const FollowersTable = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent side='right'>
             <DropdownMenuItem asChild className='cursor-pointer'>
-              <Link
-                target='_blank'
-                href={`/${row.original.followerUser.username}`}
-              >
+              <Link target='_blank' href={`/${row.original.user.username}`}>
                 <User className='mr-2 size-4' />
                 {t('columns.viewChannel')}
               </Link>
@@ -97,13 +108,16 @@ const FollowersTable = () => {
         size={'large'}
       />
       <div className='mt-6'>
-        {isLoadingFollowers ? (
+        {isLoadingSponsors ? (
           <DataTableSkeleton />
         ) : (
           <DataTable
-            columns={followersColumns}
-            data={followers}
-            filterKeys={[{ id: 'createdAt', title: t('columns.date') }]}
+            columns={sponsorsColumns}
+            data={sponsors}
+            filterKeys={[
+              { id: 'expiresAt', title: t('columns.date') },
+              { id: 'planTitle', title: t('columns.plan') },
+            ]}
           />
         )}
       </div>
@@ -111,4 +125,4 @@ const FollowersTable = () => {
   );
 };
 
-export default FollowersTable;
+export default SponsorsTable;
