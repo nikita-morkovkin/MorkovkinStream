@@ -1,3 +1,4 @@
+import EmptyState from '@/components/ui/elements/EmptyState';
 import Heading from '@/components/ui/elements/Heading';
 import { type FindRandomStreamsQuery } from '@/graphql/gql/graphql';
 import StreamCard from './StreamCard';
@@ -9,7 +10,7 @@ interface StreamsListProps {
 
 const StreamsList = ({ streams, heading }: StreamsListProps) => {
   return streams.length === 0 ? (
-    <div>It was found nothing</div>
+    <EmptyState />
   ) : (
     <>
       {heading && <Heading title={heading} />}
