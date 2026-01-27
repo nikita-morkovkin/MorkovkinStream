@@ -6,56 +6,13 @@ import {
 } from '@/graphql/gql/graphql';
 import { SERVER_URL } from '@/shared/constants/url.constants';
 import { getMediaSource } from '@/shared/utils/get-media-source.util';
+import { print } from 'graphql';
 import { type Metadata } from 'next';
-
-function generateFakeCategory(
-  slug: string,
-): FindCategoryBySlugQuery['findCategoryBySlug'] {
-  return {
-    title: slug
-      .split('-')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' '),
-    thumbnailUrl:
-      'https://static-cdn.jtvnw.net/ttv-boxart/1614555877-285x380.jpg',
-    description:
-      'This is a mock category description. In a real environment, this data would be fetched from the server.',
-    streams: [
-      {
-        title: 'Exploring the new update!',
-        thumbnailUrl: null,
-        isLive: true,
-        user: {
-          username: 'morkovkin',
-          avatar: null,
-          isVerified: true,
-        },
-        category: {
-          title: 'Brawl Stars',
-          slug: 'brawl-stars',
-        },
-      },
-      {
-        title: 'Road to Global Elite',
-        thumbnailUrl: null,
-        isLive: false,
-        user: {
-          username: 'streamer_pro',
-          avatar: null,
-          isVerified: false,
-        },
-        category: {
-          title: 'Counter-Strike 2',
-          slug: 'cs2',
-        },
-      },
-    ],
-  };
-}
+import { notFound } from 'next/navigation';
 
 async function findCategoryBySlug(slug: string) {
   try {
-    const query = FindCategoryBySlugDocument.loc?.source.body;
+    const query = print(FindCategoryBySlugDocument);
     const variables: FindCategoryBySlugQueryVariables = { slug };
 
     const response = await fetch(SERVER_URL, {
@@ -71,21 +28,12 @@ async function findCategoryBySlug(slug: string) {
 
     const data = await response.json();
 
-    if (!data.data || !data.data.findCategoryBySlug) {
-      return {
-        category: generateFakeCategory(slug),
-      };
-    }
-
     return {
       category: data.data
         .findCategoryBySlug as FindCategoryBySlugQuery['findCategoryBySlug'],
     };
-  } catch (error) {
-    console.error(error);
-    return {
-      category: generateFakeCategory(slug),
-    };
+  } catch {
+    notFound();
   }
 }
 

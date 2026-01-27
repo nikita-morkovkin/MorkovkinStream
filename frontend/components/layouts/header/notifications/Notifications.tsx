@@ -12,7 +12,7 @@ const Notifications = () => {
   const { data, loading: isLoadingCount } = useQuery(
     FindUnreadNotificationsCountDocument,
   );
-  const countNotifications = data?.findUnreadNotificationCount ?? 0;
+  const countNotifications = data?.findUnreadNotificationsCount ?? 0;
 
   // It shows count of notifications like YouTube,
   // if more 9, it will be 9+,

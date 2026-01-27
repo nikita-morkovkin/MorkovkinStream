@@ -25,7 +25,7 @@ export class ChannelService {
   }
 
   public async findByUsername(username: string) {
-    const channel = await this.prismaService.user.findUnique({
+    const channel = await this.prismaService.user.findFirst({
       where: {
         username,
         isDeactivated: false,

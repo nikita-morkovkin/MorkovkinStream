@@ -4,12 +4,14 @@ import {
   FindAllStreamsQueryVariables,
 } from '@/graphql/gql/graphql';
 import { SERVER_URL } from '@/shared/constants/url.constants';
+import { print } from 'graphql';
 import { type Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
 async function findAllStreams() {
   try {
-    const query = FindAllStreamsDocument.loc?.source.body;
+    const query = print(FindAllStreamsDocument);
     const variables: FindAllStreamsQueryVariables = {
       filters: {},
     };
@@ -31,11 +33,8 @@ async function findAllStreams() {
     return {
       streams: list,
     };
-  } catch (error) {
-    console.error(error);
-    return {
-      streams: [],
-    };
+  } catch {
+    notFound();
   }
 }
 

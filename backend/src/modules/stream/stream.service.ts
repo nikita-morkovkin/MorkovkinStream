@@ -194,11 +194,13 @@ export class StreamService {
       throw new NotFoundException('Канал не найден');
     }
 
+    const isHost = self.id === channel.id;
+
     const token = new AccessToken(
       this.configService.getOrThrow<string>('LIVEKIT_API_KEY'),
       this.configService.getOrThrow<string>('LIVEKIT_API_SECRET'),
       {
-        identity: self.id,
+        identity: isHost ? `Host-${self.id}` : self.id.toString(),
         name: self.username,
       },
     );

@@ -1,5 +1,6 @@
 'use client';
 
+import { Skeleton } from '@/components/ui/common/Skeleton';
 import {
   type FindAllCategoriesQuery,
   type FindRandomCategoriesQuery,
@@ -10,6 +11,7 @@ import { getRandomColor } from '@/shared/utils/get-random-color';
 import { cn } from '@/shared/utils/tw-merge.util';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 interface CategoryCardProps {
   category:
@@ -19,6 +21,7 @@ interface CategoryCardProps {
 
 const CategoryCard = ({ category }: CategoryCardProps) => {
   const { isOpen } = useSidebar();
+  const [isLoaded, setIsLoaded] = useState(false);
   const randomColor = getRandomColor(category.title);
 
   return (
@@ -36,12 +39,18 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
           className='absolute inset-0 flex items-center justify-center rounded-xl opacity-0 transition-opacity group-hover:opacity-100'
           style={{ backgroundColor: randomColor }}
         />
+        {!isLoaded && (
+          <Skeleton className='absolute inset-0 h-full w-full rounded-lg transition-transform group-hover:-translate-y-2 group-hover:translate-x-2' />
+        )}
         <Image
           src={getMediaSource(category.thumbnailUrl)}
           alt={category.title}
           fill
-          className={`rounded-lg object-cover transition-transform
-          group-hover:-translate-y-2 group-hover:translate-x-2`}
+          onLoad={() => setIsLoaded(true)}
+          className={cn(
+            'rounded-lg object-cover transition-transform group-hover:-translate-y-2 group-hover:translate-x-2',
+            !isLoaded && 'opacity-0',
+          )}
         />
       </div>
       <div>
