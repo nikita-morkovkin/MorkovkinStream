@@ -5,7 +5,6 @@ import {
 } from '@/graphql/gql/graphql';
 import { SERVER_URL } from '@/shared/constants/url.constants';
 import { getMediaSource } from '@/shared/utils/get-media-source.util';
-import { LiveKitRoom } from '@livekit/components-react';
 import { print } from 'graphql';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -64,7 +63,5 @@ export default async function ChannelPage(props: {
 
   const { channel } = await findChannelByUsername(params);
 
-  return (
-    <StreamOverview channel={channel}/>
-  );
+  return <StreamOverview channel={channel} />;
 }

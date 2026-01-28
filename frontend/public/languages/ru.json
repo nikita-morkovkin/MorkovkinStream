@@ -66,6 +66,70 @@
     "searchHeading": "Поиск по запросу",
     "description": "Все стримы на сайте"
   },
+  "stream": {
+    "video": {
+      "offline": "не в сети",
+      "loading": "Подключение...",
+      "player": {
+        "volume": "Громкость",
+        "fullscreen": {
+          "open": "Полноэкранный режим",
+          "exit": "Выйти из полноэкранного режима"
+        }
+      }
+    },
+    "info": {
+      "viewers": "зрителей",
+      "offline": "не в сети"
+    },
+    "actions": {
+      "follow": {
+        "confirmUnfollowHeading": "Перестать отслеживать",
+        "confirmUnfollowMessage": "Вы больше не будете получить уведомления от этого канала и он пропадет из списка отслеживаемых",
+        "unfollowButton": "Перестать отслеживать",
+        "followButton": "Отслеживать",
+        "successFollowMessage": "Вы успешно подписались",
+        "errorFollowMessage": "Ошибка при подписке",
+        "successUnfollowMessage": "Вы успешно описались",
+        "errorUnfollowMessage": "Ошибка при описке"
+      },
+      "support": {
+        "alreadySponsor": "Вы уже спонсор",
+        "supportAuthor": "Поддержать автора",
+        "perMonth": "в месяц",
+        "choose": "Выбрать",
+        "errorMessage": "Ошибка при создании платежа"
+      },
+      "share": {
+        "heading": "Поделиться с помощью"
+      }
+    },
+    "aboutChannel": {
+      "heading": "Информация про",
+      "followersCount": "фолловеров",
+      "noDescription": "Описание не указано"
+    },
+    "sponsors": {
+      "heading": "Спонсоры канала"
+    },
+    "chat": {
+      "heading": "Чат",
+      "unavailable": "Чат не доступен",
+      "unavailableMessage": "Чат недоступен, пока на канале нет трансляции. Пожалуйста, загляните позже!",
+      "loading": "Подключение...",
+      "info": {
+        "authRequired": "Требуется авторизация",
+        "chatDisabled": "Чат отключен",
+        "premiumFollowersOnly": "Только для спонсоров",
+        "followersOnly": "Только для подписчиков"
+      },
+      "sendMessage": {
+        "placeholder": "Отправить сообщение",
+        "emojiPlaceholder": "Поиск",
+        "errorMessage": "Ошибка при отправке сообщения"
+      }
+    }
+  },
   "auth": {
     "register": {
       "heading": "Регистрация в Nexa",

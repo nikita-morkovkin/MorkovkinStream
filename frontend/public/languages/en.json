@@ -65,6 +65,70 @@
     "searchHeading": "Search results",
     "description": "All the streams at the website"
   },
+  "stream": {
+    "video": {
+      "offline": "offline",
+      "loading": "Connecting...",
+      "player": {
+        "volume": "Volume",
+        "fullscreen": {
+          "open": "Enter Fullscreen",
+          "exit": "Exit Fullscreen"
+        }
+      }
+    },
+    "info": {
+      "viewers": "viewers",
+      "offline": "offline"
+    },
+    "actions": {
+      "follow": {
+        "confirmUnfollowHeading": "Unfollow",
+        "confirmUnfollowMessage": "You will no longer receive notifications from this channel and it will be removed from your following list",
+        "unfollowButton": "Unfollow",
+        "followButton": "Follow",
+        "successFollowMessage": "Successfully followed",
+        "errorFollowMessage": "Error while following",
+        "successUnfollowMessage": "Successfully unfollowed",
+        "errorUnfollowMessage": "Error while unfollowing"
+      },
+      "support": {
+        "alreadySponsor": "Already a sponsor",
+        "supportAuthor": "Support Author",
+        "perMonth": "per month",
+        "choose": "Select",
+        "errorMessage": "Error creating payment"
+      },
+      "share": {
+        "heading": "Share via"
+      }
+    },
+    "aboutChannel": {
+      "heading": "About",
+      "followersCount": "followers",
+      "noDescription": "No description provided"
+    },
+    "sponsors": {
+      "heading": "Channel Sponsors"
+    },
+    "chat": {
+      "heading": "Chat",
+      "unavailable": "Chat unavailable",
+      "unavailableMessage": "Chat is unavailable while the channel is offline. Please check back later!",
+      "loading": "Connecting...",
+      "info": {
+        "authRequired": "Authorization required",
+        "chatDisabled": "Chat disabled",
+        "premiumFollowersOnly": "Sponsors only",
+        "followersOnly": "Followers only"
+      },
+      "sendMessage": {
+        "placeholder": "Send a message",
+        "emojiPlaceholder": "Search",
+        "errorMessage": "Error sending message"
+      }
+    }
+  },
   "auth": {
     "register": {
       "heading": "Sign up for Nexa",
